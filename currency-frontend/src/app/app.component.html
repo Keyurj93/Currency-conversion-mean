@@ -1,0 +1,39 @@
+<div class="container">
+  <form >
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <label for="currencies" class="d-block">From</label>
+        <select name="currencies" id="currenciesFrom" [(ngModel)]="currencyFrom" name="currencyFrom">
+          <option value=''>Select a Currency</option>
+          <option *ngFor="let currency of currencyList" [value]="currency">{{currency}}</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="currencies" class="d-block">To</label>
+        <select name="currencies" id="currenciesTo" [(ngModel)]="currencyTo" name="currencyTo" [disabled]="!currencyFrom">
+          <option value=''>Select a Currency</option>
+          <option *ngFor="let currency of currencyList" [value]="currency" [disabled]="currency === currencyFrom">{{currency}}</option>
+        </select>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <label for="currencies" class="d-block">From</label>
+        <input type="number" name="from" [(ngModel)]="fromCurrency" placeholder="Enter an amount"
+          [disabled]="!currencyFrom || !currencyTo" (input)="calculateConversion($event)">
+      </div>
+      <div class="col-md-3">
+        <label for="currencies" class="d-block">To</label>
+        <input type="number" name="to" [(ngModel)]="toCurrency" [disabled]="true">
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    <div class="text-center">
+      <button type="button" (click)="refreshRates()" class="btn btn-primary mt-5">Refresh Rates</button>
+    </div>
+  </form>
+
+</div>
